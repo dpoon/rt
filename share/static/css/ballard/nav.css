@@ -78,7 +78,6 @@
     position: absolute;
     top: 6em;
     right: 0em;
-    z-index: 9995;
     font-size: 0.9em;
     background-color: #eee;
     border: 1px solid #ccc;
@@ -142,8 +141,13 @@
  color: #000;
  }
 
-#simple-search input.field {
+#topactions input.field {
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
 }
+
+#topactions input.select-queue {
+    border: none;
+}
+
