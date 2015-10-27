@@ -1687,7 +1687,7 @@ sub MakeSureIndexExists {
         RT->Logger->debug( ucfirst $self->IndexDescription(
             Table => $args{'Table'}, Columns => [@{$args{'Columns'}}, @{$args{'Optional'}}],
         ). ' exists.' );
-        return;
+        return 1;
     }
 
     @list = $self->IndexesThatBeginWith(
@@ -1699,6 +1699,7 @@ sub MakeSureIndexExists {
         );
         my $method = $status ? 'debug' : 'warning';
         RT->Logger->$method($msg);
+        return $status;
     }
     else {
         RT->Logger->info(
@@ -1710,6 +1711,7 @@ sub MakeSureIndexExists {
                 Table => $args{'Table'}, Columns => [@{$args{'Columns'}}, @{$args{'Optional'}}],
             )
         );
+        return 1;
     }
 }
 
