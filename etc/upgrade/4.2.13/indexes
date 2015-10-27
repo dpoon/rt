@@ -1,0 +1,11 @@
+use strict;
+use warnings;
+
+$RT::Handle->DropIndexesThatArePrefix(
+    Table => 'ObjectCustomFieldValues',
+    Columns => ['CustomField', 'ObjectType', 'ObjectId', 'Content'],
+);
+$RT::Handle->MakeSureIndexExists(
+    Table => 'ObjectCustomFieldValues',
+    Columns => ['Content'],
+);

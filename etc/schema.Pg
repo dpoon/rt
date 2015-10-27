@@ -528,7 +528,7 @@ CREATE TABLE ObjectCustomFieldValues (
 
 );
 
-CREATE INDEX ObjectCustomFieldValues1 ON ObjectCustomFieldValues (CustomField,ObjectType,ObjectId,Content); 
+CREATE INDEX ObjectCustomFieldValues1 ON ObjectCustomFieldValues (Content);
 CREATE INDEX ObjectCustomFieldValues2 ON ObjectCustomFieldValues (CustomField,ObjectType,ObjectId); 
 
 
