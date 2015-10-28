@@ -13,7 +13,7 @@ our @Attributes = (
     { Name => 'Search - Unowned Tickets',
       Description => '[_1] newest unowned tickets',
       Content     =>
-      { Format => "'<a href=\"__WebPath__/Ticket/Display.html?id=__id__\">__id__</a>/TITLE:#', '<a href=\"__WebPath__/Ticket/Display.html?id=__id__\">__Subject__</a>/TITLE:Subject', QueueName, ExtendedStatus, CreatedRelative, '<A HREF=\"__WebPath__/Ticket/Display.html?Action=Take&id=__id__\">__loc(Take)__</a>/TITLE:&nbsp;' ",
+      { Format => "'<a href=\"__WebPath__/Ticket/Display.html?id=__id__\">__id__</a>/TITLE:#', '<a href=\"__WebPath__/Ticket/Display.html?id=__id__\">__Subject__</a>/TITLE:Subject', QueueName, ExtendedStatus, CreatedRelative, '<a href=\"__WebPath__/Ticket/Display.html?Action=Take&id=__id__\">__loc(Take)__</a> <a href=\"__WebPath__/Ticket/Display.html?Action=Delete&id=__id__\">__loc(Delete)__</a>/TITLE:&nbsp;' ",
         Query   => " Owner = 'Nobody' AND ( Status = 'new' OR Status = 'open')",
         OrderBy => 'Created',
         Order   => 'DESC' },

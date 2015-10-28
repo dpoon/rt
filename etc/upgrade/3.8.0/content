@@ -21,5 +21,25 @@ our @Final = (
         RT->Logger->debug("Renamed.");
         return 1;
     },
-);
+    sub {
+        RT->Logger->debug("Editing 'N newest unowned tickets'");
+        my $sys = RT::System->new(RT->SystemUser);
 
+        my $attrs = RT::Attributes->new( RT->SystemUser );
+        $attrs->LimitToObject( $sys );
+        my ($attr) = $attrs->Named( 'Search - Unowned Tickets' );
+        unless ($attr) {
+            RT->Logger->debug("You have no global search 'N newest unowned tickets'. Skipped.");
+            return 1;
+        }
+        my $Content = $attr->Content;
+        my $format = $Content->{'Format'};
+        $format =~ s/Action=Kill/Action=Delete/;
+        $Content->{'Format'} = $format;
+        my ($status, $msg) = $attr->SetContent($Content);
+        RT->Logger->error($msg) and return undef unless $status;
+
+        RT->Logger->debug("Edited.");
+        return 1;
+    },
+);
