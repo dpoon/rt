@@ -53,6 +53,7 @@ use warnings;
 use 5.010;
 
 use Email::Address;
+use Email::MIME::RFC2047::Decoder;
 use MIME::Entity;
 use RT::EmailParser;
 use File::Temp;
@@ -1347,7 +1348,7 @@ sub Gateway {
         || "<no-message-id-". time . rand(2000) .'@'. RT->Config->Get('Organization') .'>';
 
     #Pull apart the subject line
-    my $Subject = Encode::decode( "UTF-8", $head->get('Subject') || '');
+    my $Subject = Email::MIME::RFC2047::Decoder->new->decode_text( $head->get('Subject') || '' );
     chomp $Subject;
     
     # Lets check for mail loops of various sorts.

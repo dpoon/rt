@@ -201,8 +201,10 @@ sub Create {
     else {
 
         my ( $encoding, $type, $note_args );
+        my $AttachmentBody = $Attachment->bodyhandle->as_string;
+        eval { $AttachmentBody = Encode::decode_utf8($AttachmentBody, 1) };
         ( $encoding, $content, $type, $Filename, $note_args ) =
-                $self->_EncodeLOB( $Attachment->bodyhandle->as_string, $Attachment->mime_type, $Filename, );
+                $self->_EncodeLOB( $AttachmentBody, $Attachment->mime_type, $Filename, );
 
         my $id = $self->SUPER::Create(
             TransactionId   => $args{'TransactionId'},
