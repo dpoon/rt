@@ -215,7 +215,11 @@ sub Gateway {
     $args{'ticket'} ||= ExtractTicketId( $Message );
 
     my $SystemTicket = RT::Ticket->new( RT->SystemUser );
-    $SystemTicket->Load( $args{'ticket'} ) if ( $args{'ticket'} ) ;
+    if ( $args{'ticket'} ) {
+        $SystemTicket->Load( $args{'ticket'} ) and
+        $SystemQueueObj = $SystemTicket->QueueObj and
+        $args{'queue'} = $SystemQueue->Name;
+    }
 
     # We can safely have no queue of we have a known-good ticket
     TMPFAIL("RT couldn't find the queue: " . $args{'queue'})
